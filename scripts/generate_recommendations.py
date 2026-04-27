@@ -19,7 +19,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate latest target portfolio recommendations.")
     parser.add_argument("--data", default="data/raw/yahoo/all_symbols.csv")
     parser.add_argument("--model", default="models/stock_ranker.joblib")
-    parser.add_argument("--strategy", choices=["model", "momentum_20d"], default="model")
+    parser.add_argument(
+        "--strategy",
+        choices=["model", "model_momentum_blend", "momentum_20d"],
+        default="model_momentum_blend",
+    )
+    parser.add_argument("--model-weight", type=float, default=None)
     parser.add_argument("--benchmark", default="SPY")
     parser.add_argument("--top-n", type=int, default=5)
     parser.add_argument("--portfolio-allocation", type=float, default=0.95)
@@ -39,12 +44,23 @@ def main() -> None:
     if latest.empty:
         raise SystemExit("No latest rows available after feature generation.")
 
-    if args.strategy == "model":
+    if args.strategy in {"model", "model_momentum_blend"}:
         with open(os.devnull, "w", encoding="utf-8") as devnull:
             with contextlib.redirect_stderr(devnull):
                 artifact = joblib.load(args.model)
-                latest["score"] = artifact["model"].predict_proba(latest[FEATURE_COLUMNS])[:, 1]
+                latest["model_score"] = artifact["model"].predict_proba(latest[FEATURE_COLUMNS])[:, 1]
+        if args.strategy == "model":
+            latest["score"] = latest["model_score"]
+        else:
+            model_weight = args.model_weight
+            if model_weight is None:
+                model_weight = float(artifact.get("model_weight", 0.25))
+            latest["score"] = (
+                model_weight * latest["model_score"].rank(pct=True)
+                + (1 - model_weight) * latest["return_20d"].rank(pct=True)
+            )
     else:
+        latest["model_score"] = np.nan
         latest["score"] = latest["return_20d"]
 
     picks = latest.sort_values("score", ascending=False).head(args.top_n).copy()

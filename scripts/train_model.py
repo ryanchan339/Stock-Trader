@@ -30,6 +30,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--test-start", default="2024-01-01")
     parser.add_argument("--top-n", type=int, default=5)
     parser.add_argument("--rebalance-every", type=int, default=5)
+    parser.add_argument(
+        "--model-preset",
+        choices=["fast_gbdt", "balanced_gbdt", "random_forest"],
+        default="balanced_gbdt",
+    )
+    parser.add_argument(
+        "--score-mode",
+        choices=["model", "model_momentum_blend", "momentum_20d"],
+        default="model_momentum_blend",
+    )
+    parser.add_argument("--model-weight", type=float, default=0.25)
     parser.add_argument("--models-dir", default="models")
     parser.add_argument("--reports-dir", default="reports")
     return parser.parse_args()
@@ -51,15 +62,23 @@ def main() -> None:
     if train.empty or test.empty:
         raise SystemExit("Train/test split produced an empty set. Adjust --test-start.")
 
-    model = fit_model(build_model(), train)
+    model = fit_model(build_model(preset=args.model_preset), train)
 
-    scored = score_frame(model, test)
-    evaluation = evaluate_scores(test, scored["score"])
+    scored = score_frame(
+        model,
+        test,
+        score_mode=args.score_mode,
+        model_weight=args.model_weight,
+    )
+    evaluation = evaluate_scores(test, scored["model_score"])
     classification = {
         **evaluation.as_dict(),
         "train_rows": int(len(train)),
         "test_start": args.test_start,
         "horizon_days": args.horizon,
+        "model_preset": args.model_preset,
+        "score_mode": args.score_mode,
+        "model_weight": args.model_weight,
     }
 
     equity, trades, backtest_metrics = run_rank_backtest(
@@ -71,7 +90,15 @@ def main() -> None:
 
     metrics = {"classification": classification, "backtest": backtest_metrics}
     joblib.dump(
-        {"model": model, "features": FEATURE_COLUMNS, "benchmark": args.benchmark, "horizon": args.horizon},
+        {
+            "model": model,
+            "features": FEATURE_COLUMNS,
+            "benchmark": args.benchmark,
+            "horizon": args.horizon,
+            "model_preset": args.model_preset,
+            "score_mode": args.score_mode,
+            "model_weight": args.model_weight,
+        },
         models_dir / "stock_ranker.joblib",
     )
     frame.to_csv(reports_dir / "model_frame.csv", index=False)

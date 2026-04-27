@@ -68,7 +68,24 @@ baseline script compares the ML strategy against simple non-ML strategies like
 Generate recommendations:
 
 ```bash
-.venv/bin/python scripts/generate_recommendations.py --strategy model --top-n 5
+.venv/bin/python scripts/generate_recommendations.py --strategy model_momentum_blend --top-n 5
+.venv/bin/python scripts/generate_recommendations.py --strategy momentum_20d --top-n 5 --out reports/latest_momentum_recommendations.csv
+```
+
+The default paper-test score is a blended rank: 25% ML model probability and
+75% 20-day momentum. Raw model scores are still available with
+`--strategy model`, and the baseline is available with `--strategy momentum_20d`.
+During paper testing, keep generating both `reports/latest_recommendations.csv`
+and `reports/latest_momentum_recommendations.csv` so the traded blend can be
+compared against the plain momentum baseline.
+
+Refresh data and retrain before a paper-trading run:
+
+```bash
+.venv/bin/python scripts/download_yahoo_data.py
+.venv/bin/python scripts/train_model.py
+.venv/bin/python scripts/generate_recommendations.py --strategy model_momentum_blend --top-n 5
+.venv/bin/python scripts/generate_recommendations.py --strategy momentum_20d --top-n 5 --out reports/latest_momentum_recommendations.csv
 ```
 
 Generate a dry-run Alpaca order plan:
@@ -94,6 +111,33 @@ the generated order plan should you submit paper orders:
 
 The script uses market orders against Alpaca paper trading and defaults to dry
 run mode.
+
+The paper trading script applies conservative execution guardrails by default:
+
+```text
+max position weight: 15%
+max gross exposure: 75%
+minimum stock price: $5
+maximum 20-day volatility: 6%
+risk-off filter: reduce exposure by 50% when SPY is below its 100-day moving average
+```
+
+You can tune those controls per run:
+
+```bash
+.venv/bin/python scripts/alpaca_paper_trade.py \
+  --recommendations reports/latest_recommendations.csv \
+  --max-position-weight 0.10 \
+  --max-gross-exposure 0.50 \
+  --min-price 5 \
+  --max-volatility-20d 0.06 \
+  --risk-off-spy-ma-days 100 \
+  --risk-off-exposure-multiplier 0.50
+```
+
+Every dry run and submit run writes the latest plan to
+`reports/latest_order_plan.json` and appends an audit record to
+`reports/paper_trading_log.jsonl`.
 
 ## Current Prototype Notes
 

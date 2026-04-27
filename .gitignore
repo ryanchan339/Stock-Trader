@@ -3,3 +3,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+reports/wf_*/
+reports/baseline_top10/
+reports/train_top10/
+data/raw/yahoo/all_symbols.csv
+reports/model_frame.csv
+reports/test_scores.csv
+reports/walk_forward_scores.csv

@@ -42,7 +42,15 @@ def main() -> None:
     latest = frame[frame["date"] == latest_date].copy()
     with open(os.devnull, "w", encoding="utf-8") as devnull:
         with contextlib.redirect_stderr(devnull):
-            latest["score"] = artifact["model"].predict_proba(latest[FEATURE_COLUMNS])[:, 1]
+            latest["model_score"] = artifact["model"].predict_proba(latest[FEATURE_COLUMNS])[:, 1]
+    if artifact.get("score_mode") == "model_momentum_blend":
+        model_weight = float(artifact.get("model_weight", 0.25))
+        latest["score"] = (
+            model_weight * latest["model_score"].rank(pct=True)
+            + (1 - model_weight) * latest["return_20d"].rank(pct=True)
+        )
+    else:
+        latest["score"] = latest["model_score"]
     latest = latest.sort_values("score", ascending=False)
 
     print(f"Latest scored date: {latest_date.date()}")
