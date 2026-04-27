@@ -1,0 +1,19 @@
+{
+  "classification": {
+    "accuracy": 0.508520693111843,
+    "precision": 0.49699071306150105,
+    "roc_auc": 0.514425114239838,
+    "train_rows": 140534,
+    "test_rows": 55864,
+    "test_start": "2024-01-01",
+    "horizon_days": 5
+  },
+  "backtest": {
+    "total_return": 0.5912184673387699,
+    "benchmark_return": 0.5407249243730161,
+    "excess_return": 0.05049354296575381,
+    "max_drawdown": -0.31146324761314126,
+    "sharpe": 1.0193951097947407,
+    "ending_equity": 159121.846733877
+  }
+}

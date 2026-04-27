@@ -1,0 +1,43 @@
+{
+  "mode": "dry_run",
+  "paper": true,
+  "has_alpaca_keys": false,
+  "equity": 100000.0,
+  "orders": [
+    {
+      "symbol": "RTX",
+      "side": "buy",
+      "qty": null,
+      "notional": 19000.0,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "NKE",
+      "side": "buy",
+      "qty": null,
+      "notional": 19000.0,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "GE",
+      "side": "buy",
+      "qty": null,
+      "notional": 19000.0,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "DE",
+      "side": "buy",
+      "qty": null,
+      "notional": 19000.0,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "HON",
+      "side": "buy",
+      "qty": null,
+      "notional": 19000.0,
+      "reason": "raise_to_target"
+    }
+  ]
+}
