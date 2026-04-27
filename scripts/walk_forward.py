@@ -28,6 +28,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--first-test-year", type=int, default=2022)
     parser.add_argument("--top-n", type=int, default=5)
     parser.add_argument("--rebalance-every", type=int, default=5)
+    parser.add_argument(
+        "--model-preset",
+        choices=["fast_gbdt", "balanced_gbdt", "random_forest"],
+        default="balanced_gbdt",
+    )
+    parser.add_argument(
+        "--score-mode",
+        choices=["model", "model_momentum_blend", "momentum_20d"],
+        default="model_momentum_blend",
+    )
+    parser.add_argument("--model-weight", type=float, default=0.25)
     parser.add_argument("--reports-dir", default="reports")
     return parser.parse_args()
 
@@ -49,9 +60,14 @@ def main() -> None:
         if train.empty or test.empty:
             continue
 
-        model = fit_model(build_model(random_state=42), train)
-        scored = score_frame(model, test)
-        evaluation = evaluate_scores(test, scored["score"])
+        model = fit_model(build_model(random_state=42, preset=args.model_preset), train)
+        scored = score_frame(
+            model,
+            test,
+            score_mode=args.score_mode,
+            model_weight=args.model_weight,
+        )
+        evaluation = evaluate_scores(test, scored["model_score"])
         equity, trades, backtest = run_rank_backtest(
             scored=scored,
             prices=prices,
@@ -62,6 +78,9 @@ def main() -> None:
         rows.append(
             {
                 "test_year": test_year,
+                "model_preset": args.model_preset,
+                "score_mode": args.score_mode,
+                "model_weight": args.model_weight,
                 **evaluation.as_dict(),
                 "train_rows": len(train),
                 "test_rows": len(test),
@@ -89,6 +108,9 @@ def main() -> None:
         "mean_excess_return": float(summary["backtest_excess_return"].mean()),
         "worst_max_drawdown": float(summary["backtest_max_drawdown"].min()),
         "positive_excess_folds": int((summary["backtest_excess_return"] > 0).sum()),
+        "model_preset": args.model_preset,
+        "score_mode": args.score_mode,
+        "model_weight": args.model_weight,
     }
     (reports_dir / "walk_forward_metrics.json").write_text(
         json.dumps({"aggregate": aggregate, "folds": rows}, indent=2),

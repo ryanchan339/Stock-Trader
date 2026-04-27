@@ -5,35 +5,35 @@
   "equity": 100000.0,
   "orders": [
     {
-      "symbol": "RTX",
+      "symbol": "AVGO",
       "side": "buy",
       "qty": null,
       "notional": 19000.0,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "NKE",
+      "symbol": "GOOGL",
       "side": "buy",
       "qty": null,
       "notional": 19000.0,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "GE",
+      "symbol": "META",
       "side": "buy",
       "qty": null,
       "notional": 19000.0,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "DE",
+      "symbol": "MU",
       "side": "buy",
       "qty": null,
       "notional": 19000.0,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "HON",
+      "symbol": "GOOG",
       "side": "buy",
       "qty": null,
       "notional": 19000.0,

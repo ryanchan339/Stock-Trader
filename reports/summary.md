@@ -19,31 +19,44 @@ Test/backtest period: `2024-01-01` through `2026-04-27`
 ## Classification
 
 ```text
-Accuracy:  0.5109
-Precision: 0.4996
-ROC AUC:   0.5158
+Accuracy:  0.5082
+Precision: 0.4967
+ROC AUC:   0.5111
 ```
 
 ## Ranking Backtest
 
 ```text
 Starting equity:   $100,000.00
-Ending equity:     $165,959.75
-Total return:      65.96%
+Ending equity:     $198,987.27
+Total return:      98.99%
 SPY return:        54.07%
-Excess return:     11.89%
-Max drawdown:      -25.62%
-Sharpe ratio:      1.01
+Excess return:     44.91%
+Max drawdown:      -16.81%
+Sharpe ratio:      1.37
+Score mode:        25% ML rank / 75% 20-day momentum rank
+```
+
+## Walk-Forward Validation
+
+```text
+Folds:                  5 yearly folds, 2022-2026
+Mean yearly return:     15.75%
+Mean yearly excess:     4.61%
+Positive excess folds:  4 of 5
+Worst max drawdown:     -32.34%
+Mean ROC AUC:           0.5060
 ```
 
 ## Interpretation
 
-The classifier is only slightly better than random on the current single split.
-After adding cross-sectional rank features, yearly walk-forward validation beat
-SPY in 4 of 5 folds, but 2026 is weak so far.
+The classifier is only slightly better than random, so the production score is
+not pure model probability. It blends model rank with 20-day momentum rank. This
+improved the recent backtest and kept yearly walk-forward validation positive in
+4 of 5 folds.
 
-The 20-day momentum baseline remains strong, so paper testing should track both
-the ML recommendations and the momentum baseline.
+The 20-day momentum baseline remains strong. Paper testing should track both the
+blended ML recommendations and the raw momentum baseline.
 
 Treat this as a working paper-trading harness, not a validated live-money
 strategy.

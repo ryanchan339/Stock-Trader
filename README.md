@@ -68,8 +68,12 @@ baseline script compares the ML strategy against simple non-ML strategies like
 Generate recommendations:
 
 ```bash
-.venv/bin/python scripts/generate_recommendations.py --strategy model --top-n 5
+.venv/bin/python scripts/generate_recommendations.py --strategy model_momentum_blend --top-n 5
 ```
+
+The default paper-test score is a blended rank: 25% ML model probability and
+75% 20-day momentum. Raw model scores are still available with
+`--strategy model`, and the baseline is available with `--strategy momentum_20d`.
 
 Generate a dry-run Alpaca order plan:
 

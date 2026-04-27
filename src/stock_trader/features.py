@@ -9,12 +9,19 @@ FEATURE_COLUMNS = [
     "return_5d",
     "return_10d",
     "return_20d",
+    "return_60d",
+    "return_120d",
     "volatility_10d",
     "volatility_20d",
+    "volatility_60d",
     "volume_z_20d",
+    "dollar_volume_z_20d",
     "ma_ratio_10d",
     "ma_ratio_20d",
     "ma_ratio_50d",
+    "ma_ratio_100d",
+    "drawdown_60d",
+    "daily_range",
     "rsi_14d",
     "relative_return_5d",
     "relative_return_20d",
@@ -23,9 +30,13 @@ FEATURE_COLUMNS = [
     "spy_volatility_20d",
     "rank_return_5d",
     "rank_return_20d",
+    "rank_return_60d",
+    "rank_return_120d",
     "rank_relative_return_20d",
     "rank_low_volatility_20d",
+    "rank_low_volatility_60d",
     "rank_ma_ratio_20d",
+    "rank_drawdown_60d",
     "rank_rsi_14d",
 ]
 
@@ -53,14 +64,24 @@ def add_technical_features(data: pd.DataFrame, benchmark: str = "SPY") -> pd.Dat
         group["return_5d"] = close.pct_change(5)
         group["return_10d"] = close.pct_change(10)
         group["return_20d"] = close.pct_change(20)
+        group["return_60d"] = close.pct_change(60)
+        group["return_120d"] = close.pct_change(120)
         group["volatility_10d"] = group["return_1d"].rolling(10).std()
         group["volatility_20d"] = group["return_1d"].rolling(20).std()
+        group["volatility_60d"] = group["return_1d"].rolling(60).std()
         group["volume_z_20d"] = (
             (volume - volume.rolling(20).mean()) / volume.rolling(20).std()
+        )
+        dollar_volume = close * volume
+        group["dollar_volume_z_20d"] = (
+            (dollar_volume - dollar_volume.rolling(20).mean()) / dollar_volume.rolling(20).std()
         )
         group["ma_ratio_10d"] = close / close.rolling(10).mean() - 1
         group["ma_ratio_20d"] = close / close.rolling(20).mean() - 1
         group["ma_ratio_50d"] = close / close.rolling(50).mean() - 1
+        group["ma_ratio_100d"] = close / close.rolling(100).mean() - 1
+        group["drawdown_60d"] = close / close.rolling(60).max() - 1
+        group["daily_range"] = (group["high"] - group["low"]) / close
         group["rsi_14d"] = _rsi(close, window=14)
         frames.append(group)
 
@@ -80,12 +101,19 @@ def add_technical_features(data: pd.DataFrame, benchmark: str = "SPY") -> pd.Dat
     featured["relative_return_20d"] = featured["return_20d"] - featured["spy_return_20d"]
     featured["rank_return_5d"] = featured.groupby("date")["return_5d"].rank(pct=True)
     featured["rank_return_20d"] = featured.groupby("date")["return_20d"].rank(pct=True)
+    featured["rank_return_60d"] = featured.groupby("date")["return_60d"].rank(pct=True)
+    featured["rank_return_120d"] = featured.groupby("date")["return_120d"].rank(pct=True)
     featured["rank_relative_return_20d"] = featured.groupby("date")["relative_return_20d"].rank(pct=True)
     featured["rank_low_volatility_20d"] = featured.groupby("date")["volatility_20d"].rank(
         pct=True,
         ascending=False,
     )
+    featured["rank_low_volatility_60d"] = featured.groupby("date")["volatility_60d"].rank(
+        pct=True,
+        ascending=False,
+    )
     featured["rank_ma_ratio_20d"] = featured.groupby("date")["ma_ratio_20d"].rank(pct=True)
+    featured["rank_drawdown_60d"] = featured.groupby("date")["drawdown_60d"].rank(pct=True)
     featured["rank_rsi_14d"] = featured.groupby("date")["rsi_14d"].rank(pct=True)
     return featured
 
