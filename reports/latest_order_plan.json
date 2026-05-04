@@ -1,10 +1,10 @@
 {
-  "run_id": "20260427T195705Z",
-  "created_at": "2026-04-27T19:57:05.794919+00:00",
-  "mode": "dry_run",
+  "run_id": "20260504T211245Z",
+  "created_at": "2026-05-04T21:12:45.730270+00:00",
+  "mode": "submit",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 100000.0,
+  "equity": 104448.26,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,68 +17,166 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": false,
-    "date": "2026-04-27",
-    "close": 714.10498046875,
-    "moving_average": 680.860599975586,
+    "date": "2026-05-04",
+    "close": 718.010009765625,
+    "moving_average": 682.6794323730469,
     "moving_average_days": 100
   },
   "original_targets": {
-    "AVGO": 0.19,
+    "AMZN": 0.19,
     "GOOGL": 0.19,
-    "META": 0.19,
-    "MU": 0.19,
-    "GOOG": 0.19
+    "AVGO": 0.19,
+    "GOOG": 0.19,
+    "AMD": 0.19
   },
   "eligible_targets": {
-    "AVGO": 0.19,
+    "AMZN": 0.19,
     "GOOGL": 0.19,
-    "META": 0.19,
-    "MU": 0.19,
-    "GOOG": 0.19
+    "AVGO": 0.19,
+    "GOOG": 0.19,
+    "AMD": 0.19
   },
   "adjusted_targets": {
-    "AVGO": 0.15,
+    "AMZN": 0.15,
     "GOOGL": 0.15,
-    "META": 0.15,
-    "MU": 0.15,
-    "GOOG": 0.15
+    "AVGO": 0.15,
+    "GOOG": 0.15,
+    "AMD": 0.15
   },
   "excluded_recommendations": [],
-  "positions": {},
+  "positions": {
+    "AVGO": {
+      "qty": 37.4251497,
+      "market_value": 15570.733533,
+      "current_price": 416.05
+    },
+    "GOOG": {
+      "qty": 43.396857035,
+      "market_value": 16447.408816,
+      "current_price": 379.0
+    },
+    "GOOGL": {
+      "qty": 43.152706667,
+      "market_value": 16506.341827,
+      "current_price": 382.51
+    },
+    "META": {
+      "qty": 22.318755669,
+      "market_value": 13612.247024,
+      "current_price": 609.9017
+    },
+    "MU": {
+      "qty": 29.899021449,
+      "market_value": 17311.533419,
+      "current_price": 579.0
+    }
+  },
   "orders": [
     {
-      "symbol": "AVGO",
+      "symbol": "META",
+      "side": "sell",
+      "qty": 22.318755669,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
+      "symbol": "MU",
+      "side": "sell",
+      "qty": 29.899021449,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
+      "symbol": "AMZN",
       "side": "buy",
       "qty": null,
-      "notional": 15000.0,
+      "notional": 15667.24,
       "reason": "raise_to_target"
     },
     {
       "symbol": "GOOGL",
-      "side": "buy",
-      "qty": null,
-      "notional": 15000.0,
-      "reason": "raise_to_target"
+      "side": "sell",
+      "qty": 2.193676,
+      "notional": null,
+      "reason": "trim_to_target"
     },
     {
-      "symbol": "META",
+      "symbol": "AVGO",
       "side": "buy",
       "qty": null,
-      "notional": 15000.0,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "MU",
-      "side": "buy",
-      "qty": null,
-      "notional": 15000.0,
+      "notional": 96.51,
       "reason": "raise_to_target"
     },
     {
       "symbol": "GOOG",
+      "side": "sell",
+      "qty": 2.058496,
+      "notional": null,
+      "reason": "trim_to_target"
+    },
+    {
+      "symbol": "AMD",
       "side": "buy",
       "qty": null,
-      "notional": 15000.0,
+      "notional": 15667.24,
+      "reason": "raise_to_target"
+    }
+  ],
+  "submitted_orders": [
+    {
+      "id": "7d2f440e-4e1f-4f4d-932c-08a17ba7d3ae",
+      "symbol": "META",
+      "side": "sell",
+      "qty": 22.318755669,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
+      "id": "c252981e-60bd-4395-b754-6f4cd0f3303c",
+      "symbol": "MU",
+      "side": "sell",
+      "qty": 29.899021449,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
+      "id": "8e041e74-3116-4002-b41a-c045cf073705",
+      "symbol": "AMZN",
+      "side": "buy",
+      "qty": null,
+      "notional": 15667.24,
+      "reason": "raise_to_target"
+    },
+    {
+      "id": "dbe187a8-1d13-486d-9fd2-39e0048efd5e",
+      "symbol": "GOOGL",
+      "side": "sell",
+      "qty": 2.193676,
+      "notional": null,
+      "reason": "trim_to_target"
+    },
+    {
+      "id": "99c90551-8940-4c3a-8ce8-ee8047d72d9d",
+      "symbol": "AVGO",
+      "side": "buy",
+      "qty": null,
+      "notional": 96.51,
+      "reason": "raise_to_target"
+    },
+    {
+      "id": "f8331616-8fc5-4702-970b-a8c7e5e1a600",
+      "symbol": "GOOG",
+      "side": "sell",
+      "qty": 2.058496,
+      "notional": null,
+      "reason": "trim_to_target"
+    },
+    {
+      "id": "8ece7547-53d3-4ead-858a-5b77a6bc47e2",
+      "symbol": "AMD",
+      "side": "buy",
+      "qty": null,
+      "notional": 15667.24,
       "reason": "raise_to_target"
     }
   ]

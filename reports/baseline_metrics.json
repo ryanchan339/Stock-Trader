@@ -1,29 +1,29 @@
 {
   "momentum_20d": {
-    "total_return": 1.3122097329618851,
-    "benchmark_return": 0.5407249243730161,
-    "excess_return": 0.771484808588869,
-    "max_drawdown": -0.19738748974329023,
-    "sharpe": 1.5386491070807629,
-    "ending_equity": 231220.97329618852,
-    "trade_count": 863
+    "total_return": 1.5767861044475322,
+    "benchmark_return": 0.5547470601722604,
+    "excess_return": 1.0220390442752718,
+    "max_drawdown": -0.19738748974329046,
+    "sharpe": 1.685298986695345,
+    "ending_equity": 257678.6104447532,
+    "trade_count": 869
   },
   "low_volatility_20d": {
-    "total_return": 0.2912455578730706,
-    "benchmark_return": 0.5407249243730161,
-    "excess_return": -0.2494793664999455,
-    "max_drawdown": -0.13781130758912097,
-    "sharpe": 0.9175008500851553,
-    "ending_equity": 129124.55578730706,
-    "trade_count": 814
+    "total_return": 0.30893544763919367,
+    "benchmark_return": 0.5547470601722604,
+    "excess_return": -0.24581161253306671,
+    "max_drawdown": -0.13781121283721787,
+    "sharpe": 0.9358390014723847,
+    "ending_equity": 130893.54476391936,
+    "trade_count": 821
   },
   "relative_strength_20d": {
-    "total_return": 1.3122097329618851,
-    "benchmark_return": 0.5407249243730161,
-    "excess_return": 0.771484808588869,
-    "max_drawdown": -0.19738748974329023,
-    "sharpe": 1.5386491070807629,
-    "ending_equity": 231220.97329618852,
-    "trade_count": 863
+    "total_return": 1.5767861044475322,
+    "benchmark_return": 0.5547470601722604,
+    "excess_return": 1.0220390442752718,
+    "max_drawdown": -0.19738748974329046,
+    "sharpe": 1.685298986695345,
+    "ending_equity": 257678.6104447532,
+    "trade_count": 869
   }
 }
