@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock Trader Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Stock Trader</h1>
+    <p class="sub">Paper-trading ML stock ranker &middot; <span id="generated">loading&hellip;</span></p>
+    <p class="disclaimer">Research / paper trading only. Not financial advice.</p>
+  </header>
+
+  <section id="status-cards" class="cards"></section>
+
+  <section class="panel">
+    <h2>Live paper account vs SPY</h2>
+    <p class="hint">Growth of $100 since the first recorded run. Live equity from each reweight vs buy-and-hold SPY.</p>
+    <canvas id="liveChart" height="120"></canvas>
+  </section>
+
+  <section class="panel">
+    <h2>Backtest equity vs baselines</h2>
+    <p class="hint">Standard backtest since the test start date. Model blend vs non-ML baselines.</p>
+    <canvas id="backtestChart" height="120"></canvas>
+  </section>
+
+  <section class="panel">
+    <h2>Current target holdings</h2>
+    <div id="holdings"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Order history</h2>
+    <p class="hint"><span class="badge placed">PLACED</span> = submitted to Alpaca paper &middot; <span class="badge planned">PLANNED</span> = dry-run only</p>
+    <div id="orders"></div>
+  </section>
+
+  <footer>
+    <p>Built from committed reports by <code>scripts/build_dashboard_data.py</code>.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
