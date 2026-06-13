@@ -1,0 +1,113 @@
+name: Weekly Reweight
+
+# Automates the "Weekly Reweight Runbook" from the README:
+#   refresh data -> retrain -> regenerate recommendations -> build a dry-run plan.
+#
+# The scheduled run is ALWAYS a dry run. Submitting paper orders is the only
+# hard-to-reverse step and the README requires a human review checklist first,
+# so --submit is exposed only as a manual, off-by-default workflow_dispatch input.
+
+on:
+  schedule:
+    # Friday 22:00 UTC ~ after the US market close (covers EST and EDT) so the
+    # latest session's Yahoo data is available. Roughly one reweight per 5
+    # trading days, matching the strategy's rebalance cadence.
+    - cron: "0 22 * * 5"
+  workflow_dispatch:
+    inputs:
+      submit:
+        description: "Submit paper orders to Alpaca after the dry run (DANGER: places live paper orders)."
+        type: boolean
+        default: false
+
+# Never let two reweights run at once and clobber each other's commit.
+concurrency:
+  group: weekly-reweight
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  reweight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+      ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+      ALPACA_PAPER: ${{ secrets.ALPACA_PAPER || 'true' }}
+      ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Refresh Yahoo market data
+        run: python scripts/download_yahoo_data.py
+
+      - name: Retrain ranking model
+        run: python scripts/train_model.py
+
+      - name: Generate blended recommendations
+        run: python scripts/generate_recommendations.py --strategy model_momentum_blend --top-n 5
+
+      - name: Generate momentum comparison recommendations
+        run: python scripts/generate_recommendations.py --strategy momentum_20d --top-n 5 --out reports/latest_momentum_recommendations.csv
+
+      - name: Build dry-run Alpaca order plan
+        run: python scripts/alpaca_paper_trade.py --recommendations reports/latest_recommendations.csv
+
+      - name: Show dry-run plan summary
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          plan = json.loads(pathlib.Path("reports/latest_order_plan.json").read_text())
+          print("created_at:", plan.get("created_at"))
+          print("mode:", plan.get("mode"))
+          print("equity:", plan.get("equity"))
+          print("market_regime:", plan.get("market_regime"))
+          print("adjusted_targets:", plan.get("adjusted_targets"))
+          print("excluded_recommendations:", plan.get("excluded_recommendations"))
+          print("orders:", plan.get("orders"))
+          PY
+
+      - name: Submit paper orders (manual dispatch only)
+        if: github.event_name == 'workflow_dispatch' && inputs.submit
+        run: python scripts/alpaca_paper_trade.py --recommendations reports/latest_recommendations.csv --submit
+
+      - name: Commit refreshed artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A reports models data/raw/yahoo
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            mode="dry-run"
+            if [ "${{ github.event_name == 'workflow_dispatch' && inputs.submit }}" = "true" ]; then
+              mode="submit"
+            fi
+            git commit -m "Automated weekly reweight ($mode) $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Heartbeat alert
+        if: always()
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, "src")
+          from stock_trader.intraday import send_alert
+          status = "${{ job.status }}"
+          send_alert(f"Weekly reweight workflow finished: {status}")
+          PY
