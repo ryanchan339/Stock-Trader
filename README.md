@@ -219,6 +219,37 @@ After reviewing the dry-run plan, submit paper orders with:
 The submit command sends market orders to Alpaca paper trading and appends the
 submitted order ids to the latest audit record.
 
+## Automated Reweight (GitHub Actions)
+
+`.github/workflows/weekly-reweight.yml` runs the reweight runbook on a schedule
+(Friday 22:00 UTC, after the US close, ~once per 5 trading days) and can also be
+started manually from the Actions tab.
+
+What it does on every run:
+
+- Refreshes Yahoo data, retrains the model, regenerates the blended and momentum
+  recommendations, and builds a **dry-run** Alpaca order plan.
+- Commits the refreshed `reports/`, `models/`, and `data/raw/yahoo/` artifacts
+  back to the branch.
+- Posts a heartbeat to `ALERT_WEBHOOK_URL` if configured.
+
+Submitting paper orders is intentionally never automatic. The scheduled run is
+always a dry run. To submit, trigger the workflow manually (`workflow_dispatch`)
+and set the `submit` input to `true` after reviewing the dry-run plan against the
+Submit Checklist below.
+
+Configure these repository secrets (Settings → Secrets and variables → Actions)
+so the dry-run plan can read live paper account state and send alerts. All are
+optional; without them the run falls back to the `$100,000` dry-run equity and a
+silent heartbeat:
+
+```text
+ALPACA_API_KEY
+ALPACA_SECRET_KEY
+ALPACA_PAPER          (defaults to "true" if unset)
+ALERT_WEBHOOK_URL
+```
+
 ## Submit Checklist
 
 Before running the `--submit` command, verify:
