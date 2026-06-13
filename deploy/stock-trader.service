@@ -1,0 +1,28 @@
+[Unit]
+# systemd unit for the always-on intraday paper-trading service.
+# Install on a Linux VM:
+#   sudo cp deploy/stock-trader.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now stock-trader
+# Watch it:
+#   journalctl -u stock-trader -f
+Description=Stock-Trader intraday paper-trading service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Adjust User and paths to wherever you checked the repo out.
+User=trader
+WorkingDirectory=/opt/stock-trader
+EnvironmentFile=/opt/stock-trader/.env
+# Default to safe DRY-RUN. Add --submit once you trust it (paper account only).
+ExecStart=/opt/stock-trader/.venv/bin/python scripts/live_trader.py --universe starter
+Restart=always
+RestartSec=10
+# Don't thrash if it crash-loops at boot.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
