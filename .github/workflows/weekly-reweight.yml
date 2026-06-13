@@ -103,11 +103,27 @@ jobs:
 
       - name: Heartbeat alert
         if: always()
+        continue-on-error: true
         run: |
           python - <<'PY'
-          import sys
-          sys.path.insert(0, "src")
-          from stock_trader.intraday import send_alert
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from datetime import UTC, datetime
+
           status = "${{ job.status }}"
-          send_alert(f"Weekly reweight workflow finished: {status}")
+          message = f"[{datetime.now(UTC).isoformat(timespec='seconds')}] Weekly reweight workflow finished: {status}"
+          print(message, flush=True)
+
+          webhook_url = os.environ.get("ALERT_WEBHOOK_URL")
+          if webhook_url:
+              body = json.dumps({"content": message, "text": message}).encode("utf-8")
+              request = urllib.request.Request(
+                  webhook_url, data=body, headers={"Content-Type": "application/json"}
+              )
+              try:
+                  urllib.request.urlopen(request, timeout=5)
+              except (urllib.error.URLError, TimeoutError) as exc:
+                  print(f"alert webhook failed: {exc}", flush=True)
           PY
