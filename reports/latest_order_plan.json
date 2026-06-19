@@ -1,10 +1,10 @@
 {
-  "run_id": "20260613T165618Z",
-  "created_at": "2026-06-13T16:56:18.669377+00:00",
-  "mode": "submit",
+  "run_id": "20260619T230327Z",
+  "created_at": "2026-06-19T23:03:27.229127+00:00",
+  "mode": "dry_run",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 106657.86,
+  "equity": 106801.62,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,151 +17,129 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": false,
-    "date": "2026-06-12",
-    "close": 741.75,
-    "moving_average": 699.1605090332031,
+    "date": "2026-06-18",
+    "close": 746.739990234375,
+    "moving_average": 699.8171221923828,
     "moving_average_days": 100
   },
   "original_targets": {
-    "NOW": 0.19,
-    "TJX": 0.19,
+    "CAT": 0.19,
     "GE": 0.19,
-    "C": 0.19,
-    "TGT": 0.19
+    "MS": 0.19,
+    "GS": 0.19,
+    "BAC": 0.19
   },
   "eligible_targets": {
-    "NOW": 0.19,
-    "TJX": 0.19,
+    "CAT": 0.19,
     "GE": 0.19,
-    "C": 0.19,
-    "TGT": 0.19
+    "MS": 0.19,
+    "GS": 0.19,
+    "BAC": 0.19
   },
   "adjusted_targets": {
-    "NOW": 0.15,
-    "TJX": 0.15,
+    "CAT": 0.15,
     "GE": 0.15,
-    "C": 0.15,
-    "TGT": 0.15
+    "MS": 0.15,
+    "GS": 0.15,
+    "BAC": 0.15
   },
   "excluded_recommendations": [],
   "positions": {
+    "AAPL": {
+      "qty": 53.428235531,
+      "market_value": 15922.148471,
+      "current_price": 298.01
+    },
     "AMZN": {
-      "qty": 112.360659887,
-      "market_value": 26803.635416,
-      "current_price": 238.55
+      "qty": 109.201467131,
+      "market_value": 26687.746552,
+      "current_price": 244.39
     },
     "META": {
-      "qty": 45.80150145,
-      "market_value": 25968.535292,
-      "current_price": 566.98
+      "qty": 34.488618646,
+      "market_value": 19907.520455,
+      "current_price": 577.22
+    },
+    "MSFT": {
+      "qty": 54.027186091,
+      "market_value": 20497.914403,
+      "current_price": 379.4
+    },
+    "XOM": {
+      "qty": 134.031587677,
+      "market_value": 18470.893098,
+      "current_price": 137.81
     }
   },
   "orders": [
     {
+      "symbol": "AAPL",
+      "side": "sell",
+      "qty": 53.428235531,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
       "symbol": "AMZN",
       "side": "sell",
-      "qty": 112.360659887,
+      "qty": 109.201467131,
       "notional": null,
       "reason": "exit_non_target"
     },
     {
       "symbol": "META",
       "side": "sell",
-      "qty": 45.80150145,
+      "qty": 34.488618646,
       "notional": null,
       "reason": "exit_non_target"
     },
     {
-      "symbol": "NOW",
-      "side": "buy",
-      "qty": null,
-      "notional": 15998.68,
-      "reason": "raise_to_target"
+      "symbol": "MSFT",
+      "side": "sell",
+      "qty": 54.027186091,
+      "notional": null,
+      "reason": "exit_non_target"
     },
     {
-      "symbol": "TJX",
+      "symbol": "XOM",
+      "side": "sell",
+      "qty": 134.031587677,
+      "notional": null,
+      "reason": "exit_non_target"
+    },
+    {
+      "symbol": "CAT",
       "side": "buy",
       "qty": null,
-      "notional": 15998.68,
+      "notional": 16020.24,
       "reason": "raise_to_target"
     },
     {
       "symbol": "GE",
       "side": "buy",
       "qty": null,
-      "notional": 15998.68,
+      "notional": 16020.24,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "C",
+      "symbol": "MS",
       "side": "buy",
       "qty": null,
-      "notional": 15998.68,
+      "notional": 16020.24,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "TGT",
+      "symbol": "GS",
       "side": "buy",
       "qty": null,
-      "notional": 15998.68,
-      "reason": "raise_to_target"
-    }
-  ],
-  "submitted_orders": [
-    {
-      "id": "4327ca6a-5869-4631-803e-179e311c2437",
-      "symbol": "AMZN",
-      "side": "sell",
-      "qty": 112.360659887,
-      "notional": null,
-      "reason": "exit_non_target"
-    },
-    {
-      "id": "d91ef5bf-d2d1-41c7-b5c1-ca3b22afae7a",
-      "symbol": "META",
-      "side": "sell",
-      "qty": 45.80150145,
-      "notional": null,
-      "reason": "exit_non_target"
-    },
-    {
-      "id": "134d77f5-486d-46af-ac68-965dceaffff3",
-      "symbol": "NOW",
-      "side": "buy",
-      "qty": null,
-      "notional": 15998.68,
+      "notional": 16020.24,
       "reason": "raise_to_target"
     },
     {
-      "id": "ed446e37-60be-4397-9b15-cc9e76cbb94a",
-      "symbol": "TJX",
+      "symbol": "BAC",
       "side": "buy",
       "qty": null,
-      "notional": 15998.68,
-      "reason": "raise_to_target"
-    },
-    {
-      "id": "ad4155b0-22de-4e5a-9c9a-7815621ce411",
-      "symbol": "GE",
-      "side": "buy",
-      "qty": null,
-      "notional": 15998.68,
-      "reason": "raise_to_target"
-    },
-    {
-      "id": "fb9494b7-0c6c-4392-8aee-038325bd6d06",
-      "symbol": "C",
-      "side": "buy",
-      "qty": null,
-      "notional": 15998.68,
-      "reason": "raise_to_target"
-    },
-    {
-      "id": "5d11e0e0-a4c5-4ac9-a011-d8e8432270e9",
-      "symbol": "TGT",
-      "side": "buy",
-      "qty": null,
-      "notional": 15998.68,
+      "notional": 16020.24,
       "reason": "raise_to_target"
     }
   ]
