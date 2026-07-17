@@ -1,10 +1,10 @@
 {
-  "run_id": "20260710T230220Z",
-  "created_at": "2026-07-10T23:02:20.868579+00:00",
+  "run_id": "20260717T225440Z",
+  "created_at": "2026-07-17T22:54:40.453830+00:00",
   "mode": "dry_run",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 110990.48,
+  "equity": 111854.78,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,80 +17,81 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": false,
-    "date": "2026-07-10",
-    "close": 754.9500122070312,
-    "moving_average": 707.7928308105469,
+    "date": "2026-07-17",
+    "close": 743.2899780273438,
+    "moving_average": 711.2177056884766,
     "moving_average_days": 100
   },
   "original_targets": {
-    "META": 0.19,
-    "AMAT": 0.19,
-    "CAT": 0.19,
     "ABBV": 0.19,
-    "ABNB": 0.19
+    "ADBE": 0.19,
+    "NOW": 0.19,
+    "INTU": 0.19,
+    "MRK": 0.19
   },
   "eligible_targets": {
-    "META": 0.19,
-    "CAT": 0.19,
     "ABBV": 0.19,
-    "ABNB": 0.19
+    "ADBE": 0.19,
+    "NOW": 0.19,
+    "INTU": 0.19,
+    "MRK": 0.19
   },
   "adjusted_targets": {
-    "META": 0.15,
-    "CAT": 0.15,
     "ABBV": 0.15,
-    "ABNB": 0.15
+    "ADBE": 0.15,
+    "NOW": 0.15,
+    "INTU": 0.15,
+    "MRK": 0.15
   },
-  "excluded_recommendations": [
-    {
-      "symbol": "AMAT",
-      "close": 602.5,
-      "volatility_20d": 0.0656956869293726,
-      "target_weight": 0.19,
-      "reason": "above_max_volatility_20d"
-    }
-  ],
+  "excluded_recommendations": [],
   "positions": {
-    "GOOGL": {
-      "qty": 77.976063231,
-      "market_value": 27828.097446,
-      "current_price": 356.88
+    "UNH": {
+      "qty": 65.105651618,
+      "market_value": 27702.454763,
+      "current_price": 425.5
     }
   },
   "orders": [
     {
-      "symbol": "GOOGL",
+      "symbol": "UNH",
       "side": "sell",
-      "qty": 77.976063231,
+      "qty": 65.105651618,
       "notional": null,
       "reason": "exit_non_target"
-    },
-    {
-      "symbol": "META",
-      "side": "buy",
-      "qty": null,
-      "notional": 16648.57,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "CAT",
-      "side": "buy",
-      "qty": null,
-      "notional": 16648.57,
-      "reason": "raise_to_target"
     },
     {
       "symbol": "ABBV",
       "side": "buy",
       "qty": null,
-      "notional": 16648.57,
+      "notional": 16778.22,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "ABNB",
+      "symbol": "ADBE",
       "side": "buy",
       "qty": null,
-      "notional": 16648.57,
+      "notional": 16778.22,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "NOW",
+      "side": "buy",
+      "qty": null,
+      "notional": 16778.22,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "INTU",
+      "side": "buy",
+      "qty": null,
+      "notional": 16778.22,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "MRK",
+      "side": "buy",
+      "qty": null,
+      "notional": 16778.22,
       "reason": "raise_to_target"
     }
   ]
