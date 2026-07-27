@@ -79,6 +79,9 @@ def main() -> None:
         "model_preset": args.model_preset,
         "score_mode": args.score_mode,
         "model_weight": args.model_weight,
+        "top_n": args.top_n,
+        "rebalance_every": args.rebalance_every,
+        "feature_count": len(FEATURE_COLUMNS),
     }
 
     equity, trades, backtest_metrics = run_rank_backtest(

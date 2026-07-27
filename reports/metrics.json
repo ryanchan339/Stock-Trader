@@ -9,7 +9,10 @@
     "horizon_days": 5,
     "model_preset": "balanced_gbdt",
     "score_mode": "model_momentum_blend",
-    "model_weight": 0.25
+    "model_weight": 0.25,
+    "top_n": 5,
+    "rebalance_every": 5,
+    "feature_count": 33
   },
   "backtest": {
     "total_return": 1.6870335625362474,

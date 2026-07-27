@@ -250,6 +250,37 @@ ALPACA_PAPER          (defaults to "true" if unset)
 ALERT_WEBHOOK_URL
 ```
 
+## Dashboard (GitHub Pages)
+
+`docs/` is a static site served from GitHub Pages. It has five tabs: Overview,
+Performance, Activity, How It Works, and Glossary. The last two are a
+plain-language explainer aimed at a reader with no CS or finance background;
+they cover the pipeline step by step, define every term used, and state the
+honest assessment of the results (near-coin-flip accuracy, momentum baseline
+parity, negative mean walk-forward excess).
+
+```bash
+.venv/bin/python scripts/build_dashboard_data.py
+```
+
+That reads the committed reports and writes `docs/data/dashboard.json`. The
+weekly workflow runs it on every reweight. To preview locally:
+
+```bash
+.venv/bin/python -m http.server -d docs 8000
+```
+
+Every number rendered on the site comes from `docs/data/dashboard.json`, so the
+explainer text cannot drift away from the pipeline. The prose only hard-codes
+figures that are not in the reports.
+
+Note that the scheduled workflow refreshes `metrics.json`, the recommendations,
+and the order plan, but not `walk_forward_metrics.json` or
+`baseline_metrics.json`. Those come from the manual validation scripts, so the
+walk-forward and baseline numbers on the site are as old as the last time
+`walk_forward.py` and `baselines.py` were run. The site detects and states the
+baseline lag on the backtest chart.
+
 ## Submit Checklist
 
 Before running the `--submit` command, verify:
