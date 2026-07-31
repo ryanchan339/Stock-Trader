@@ -1,10 +1,10 @@
 {
-  "run_id": "20260724T230533Z",
-  "created_at": "2026-07-24T23:05:33.587769+00:00",
+  "run_id": "20260731T230553Z",
+  "created_at": "2026-07-31T23:05:53.802981+00:00",
   "mode": "dry_run",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 106862.39,
+  "equity": 108480.88,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,81 +17,68 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": false,
-    "date": "2026-07-24",
-    "close": 738.9299926757812,
-    "moving_average": 714.1268664550781,
+    "date": "2026-07-31",
+    "close": 747.030029296875,
+    "moving_average": 717.3135614013672,
     "moving_average_days": 100
   },
   "original_targets": {
-    "PYPL": 0.19,
-    "INTU": 0.19,
-    "ADBE": 0.19,
-    "AAPL": 0.19,
-    "PANW": 0.19
+    "MSFT": 0.19,
+    "AMZN": 0.19,
+    "COP": 0.19,
+    "EOG": 0.19,
+    "T": 0.19
   },
   "eligible_targets": {
-    "PYPL": 0.19,
-    "INTU": 0.19,
-    "ADBE": 0.19,
-    "AAPL": 0.19,
-    "PANW": 0.19
+    "MSFT": 0.19,
+    "AMZN": 0.19,
+    "COP": 0.19,
+    "EOG": 0.19,
+    "T": 0.19
   },
   "adjusted_targets": {
-    "PYPL": 0.15,
-    "INTU": 0.15,
-    "ADBE": 0.15,
-    "AAPL": 0.15,
-    "PANW": 0.15
+    "MSFT": 0.15,
+    "AMZN": 0.15,
+    "COP": 0.15,
+    "EOG": 0.15,
+    "T": 0.15
   },
   "excluded_recommendations": [],
-  "positions": {
-    "WMT": {
-      "qty": 246.70232907,
-      "market_value": 27001.569917,
-      "current_price": 109.45
-    }
-  },
+  "positions": {},
   "orders": [
     {
-      "symbol": "WMT",
-      "side": "sell",
-      "qty": 246.70232907,
-      "notional": null,
-      "reason": "exit_non_target"
-    },
-    {
-      "symbol": "PYPL",
+      "symbol": "MSFT",
       "side": "buy",
       "qty": null,
-      "notional": 16029.36,
+      "notional": 16272.13,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "INTU",
+      "symbol": "AMZN",
       "side": "buy",
       "qty": null,
-      "notional": 16029.36,
+      "notional": 16272.13,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "ADBE",
+      "symbol": "COP",
       "side": "buy",
       "qty": null,
-      "notional": 16029.36,
+      "notional": 16272.13,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "AAPL",
+      "symbol": "EOG",
       "side": "buy",
       "qty": null,
-      "notional": 16029.36,
+      "notional": 16272.13,
       "reason": "raise_to_target"
     },
     {
-      "symbol": "PANW",
+      "symbol": "T",
       "side": "buy",
       "qty": null,
-      "notional": 16029.36,
+      "notional": 16272.13,
       "reason": "raise_to_target"
     }
   ]
