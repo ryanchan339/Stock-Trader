@@ -1,10 +1,10 @@
 {
-  "run_id": "20260807T224103Z",
-  "created_at": "2026-08-07T22:41:03.782825+00:00",
+  "run_id": "20260814T222745Z",
+  "created_at": "2026-08-14T22:27:45.090871+00:00",
   "mode": "dry_run",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 108463.18,
+  "equity": 110320.89,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,98 +17,68 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": false,
-    "date": "2026-08-07",
-    "close": 773.260009765625,
-    "moving_average": 722.387896118164,
+    "date": "2026-08-14",
+    "close": 776.3400268554688,
+    "moving_average": 728.270005493164,
     "moving_average_days": 100
   },
   "original_targets": {
-    "MSFT": 0.19,
-    "BKNG": 0.19,
-    "INTU": 0.19,
     "NEM": 0.19,
-    "RTX": 0.19
+    "MSFT": 0.19,
+    "ORCL": 0.19,
+    "BKNG": 0.19,
+    "INTU": 0.19
   },
   "eligible_targets": {
-    "MSFT": 0.19,
-    "BKNG": 0.19,
-    "INTU": 0.19,
     "NEM": 0.19,
-    "RTX": 0.19
+    "MSFT": 0.19,
+    "ORCL": 0.19,
+    "BKNG": 0.19,
+    "INTU": 0.19
   },
   "adjusted_targets": {
-    "MSFT": 0.15,
-    "BKNG": 0.15,
-    "INTU": 0.15,
     "NEM": 0.15,
-    "RTX": 0.15
+    "MSFT": 0.15,
+    "ORCL": 0.15,
+    "BKNG": 0.15,
+    "INTU": 0.15
   },
   "excluded_recommendations": [],
-  "positions": {
-    "META": {
-      "qty": 45.769373993,
-      "market_value": 27111.488685,
-      "current_price": 592.35
-    },
-    "MSFT": {
-      "qty": 54.203158522,
-      "market_value": 27077.18784,
-      "current_price": 499.55
-    },
-    "TSLA": {
-      "qty": 82.19378257,
-      "market_value": 26990.79432,
-      "current_price": 328.38
-    }
-  },
+  "positions": {},
   "orders": [
     {
-      "symbol": "META",
-      "side": "sell",
-      "qty": 45.769373993,
-      "notional": null,
-      "reason": "exit_non_target"
-    },
-    {
-      "symbol": "TSLA",
-      "side": "sell",
-      "qty": 82.19378257,
-      "notional": null,
-      "reason": "exit_non_target"
+      "symbol": "NEM",
+      "side": "buy",
+      "qty": null,
+      "notional": 16548.13,
+      "reason": "raise_to_target"
     },
     {
       "symbol": "MSFT",
-      "side": "sell",
-      "qty": 21.634893,
-      "notional": null,
-      "reason": "trim_to_target"
+      "side": "buy",
+      "qty": null,
+      "notional": 16548.13,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "ORCL",
+      "side": "buy",
+      "qty": null,
+      "notional": 16548.13,
+      "reason": "raise_to_target"
     },
     {
       "symbol": "BKNG",
       "side": "buy",
       "qty": null,
-      "notional": 16269.48,
+      "notional": 16548.13,
       "reason": "raise_to_target"
     },
     {
       "symbol": "INTU",
       "side": "buy",
       "qty": null,
-      "notional": 16269.48,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "NEM",
-      "side": "buy",
-      "qty": null,
-      "notional": 16269.48,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "RTX",
-      "side": "buy",
-      "qty": null,
-      "notional": 16269.48,
+      "notional": 16548.13,
       "reason": "raise_to_target"
     }
   ]
