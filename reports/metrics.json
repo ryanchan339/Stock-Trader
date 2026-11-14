@@ -1,10 +1,10 @@
 {
   "classification": {
-    "accuracy": 0.5075852066715011,
-    "precision": 0.49744088925173485,
-    "roc_auc": 0.5096099020847628,
+    "accuracy": 0.5087635918484914,
+    "precision": 0.4989068648885002,
+    "roc_auc": 0.5099854247242559,
     "train_rows": 133647,
-    "test_rows": 68950,
+    "test_rows": 69435,
     "test_start": "2024-01-01",
     "horizon_days": 5,
     "model_preset": "balanced_gbdt",
@@ -15,11 +15,11 @@
     "feature_count": 33
   },
   "backtest": {
-    "total_return": 0.9270547077500342,
-    "benchmark_return": 0.6512235097372678,
-    "excess_return": 0.27583119801276634,
-    "max_drawdown": -0.22319173767072842,
-    "sharpe": 1.0440536401648544,
-    "ending_equity": 192705.47077500343
+    "total_return": 0.9236178620618538,
+    "benchmark_return": 0.6065846414821079,
+    "excess_return": 0.3170332205797459,
+    "max_drawdown": -0.2925669355609887,
+    "sharpe": 1.0304034308258376,
+    "ending_equity": 192361.78620618538
   }
 }
