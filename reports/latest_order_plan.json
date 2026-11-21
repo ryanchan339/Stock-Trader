@@ -1,10 +1,10 @@
 {
-  "run_id": "20261114T020417Z",
-  "created_at": "2026-11-14T02:04:17.545107+00:00",
+  "run_id": "20261121T030228Z",
+  "created_at": "2026-11-21T03:02:28.763571+00:00",
   "mode": "dry_run",
   "paper": true,
   "has_alpaca_keys": true,
-  "equity": 110623.75,
+  "equity": 99159.42,
   "risk_controls": {
     "max_position_weight": 0.15,
     "max_gross_exposure": 0.75,
@@ -17,48 +17,48 @@
     "benchmark": "SPY",
     "status": "ok",
     "risk_off": true,
-    "date": "2026-11-13",
-    "close": 754.3699951171875,
-    "moving_average": 759.1772857666016,
+    "date": "2026-11-20",
+    "close": 689.8099975585938,
+    "moving_average": 758.3833581542968,
     "moving_average_days": 100
   },
   "original_targets": {
-    "UPS": 0.19,
-    "LLY": 0.19,
     "LOW": 0.19,
-    "MCD": 0.19,
-    "HD": 0.19
+    "DUK": 0.19,
+    "GE": 0.19,
+    "LLY": 0.19,
+    "MCD": 0.19
   },
   "eligible_targets": {
-    "UPS": 0.19,
-    "LLY": 0.19,
     "LOW": 0.19,
-    "MCD": 0.19,
-    "HD": 0.19
+    "DUK": 0.19,
+    "GE": 0.19,
+    "LLY": 0.19,
+    "MCD": 0.19
   },
   "adjusted_targets": {
-    "UPS": 0.075,
-    "LLY": 0.075,
     "LOW": 0.075,
-    "MCD": 0.075,
-    "HD": 0.075
+    "DUK": 0.075,
+    "GE": 0.075,
+    "LLY": 0.075,
+    "MCD": 0.075
   },
   "excluded_recommendations": [],
   "positions": {
     "GOOGL": {
       "qty": 100.322643133,
-      "market_value": 29499.873213,
-      "current_price": 294.05
+      "market_value": 26614.593997,
+      "current_price": 265.29
     },
     "META": {
       "qty": 45.519482421,
-      "market_value": 28996.260802,
-      "current_price": 637.0077
+      "market_value": 25529.146521,
+      "current_price": 560.84
     },
     "NVDA": {
       "qty": 144.079203473,
-      "market_value": 23198.192551,
-      "current_price": 161.01
+      "market_value": 18086.262412,
+      "current_price": 125.53
     }
   },
   "orders": [
@@ -84,38 +84,38 @@
       "reason": "exit_non_target"
     },
     {
-      "symbol": "UPS",
+      "symbol": "LOW",
       "side": "buy",
       "qty": null,
-      "notional": 8296.78,
+      "notional": 7436.96,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "DUK",
+      "side": "buy",
+      "qty": null,
+      "notional": 7436.96,
+      "reason": "raise_to_target"
+    },
+    {
+      "symbol": "GE",
+      "side": "buy",
+      "qty": null,
+      "notional": 7436.96,
       "reason": "raise_to_target"
     },
     {
       "symbol": "LLY",
       "side": "buy",
       "qty": null,
-      "notional": 8296.78,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "LOW",
-      "side": "buy",
-      "qty": null,
-      "notional": 8296.78,
+      "notional": 7436.96,
       "reason": "raise_to_target"
     },
     {
       "symbol": "MCD",
       "side": "buy",
       "qty": null,
-      "notional": 8296.78,
-      "reason": "raise_to_target"
-    },
-    {
-      "symbol": "HD",
-      "side": "buy",
-      "qty": null,
-      "notional": 8296.78,
+      "notional": 7436.96,
       "reason": "raise_to_target"
     }
   ]
